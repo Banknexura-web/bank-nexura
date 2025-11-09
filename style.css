@@ -1,0 +1,263 @@
+
+ .prefijo{
+    color: black;
+ }
+#transferBank option {
+  color: black; /* color del texto de las opciones desplegadas */
+  background-color: white; /* opcional: mejora la visibilidad */
+}
+  :root {
+    --bg1: #0f172a;
+    --bg2: #0b1220;
+    --card-w: 340px;
+    --card-h: 200px;
+    --glass: rgba(255, 255, 255, 0.06);
+    --muted: #98a0b3;
+  }
+
+  * {
+    box-sizing: border-box;
+    font-family: Inter, "Segoe UI", Arial, sans-serif
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(1000px 500px at 10% 20%, #05263b 0%, transparent 20%),
+      radial-gradient(800px 400px at 90% 80%, #07304a 0%, transparent 20%),
+      linear-gradient(180deg, var(--bg1), var(--bg2));
+    color: #e6eef8;
+    padding: 32px;
+  }
+
+  .app {
+    width: 100%;
+    max-width: 1040px;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 28px;
+  }
+
+  .panel {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.04));
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(2, 6, 23, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  h2 {
+    margin: 0 0 12px 0;
+    font-size: 20px;
+    color: #fff
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 10px
+  }
+
+  input,
+  select,
+  button {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    color: #eaf3ff;
+  }
+
+  input::placeholder {
+    color: #9fb0d0
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    background: #0ea5ff;
+    color: #062335;
+    font-weight: 600
+  }
+
+  button.secondary {
+    background: transparent;
+    color: #a8c6e6;
+    border: 1px solid rgba(255, 255, 255, 0.04)
+  }
+
+  .muted {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 8px
+  }
+
+  .visual {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .bank-card {
+    width: var(--card-w);
+    height: var(--card-h);
+    border-radius: 16px;
+    padding: 18px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(2, 6, 23, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #004aad 0%, #007bff 100%);
+  }
+
+  .logo {
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.6px
+  }
+
+  .bank-chip {
+    width: 46px;
+    height: 34px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #e6d7b7, #d0b78a);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35);
+    margin-top: 8px;
+  }
+
+  .card-number {
+    font-family: 'OCR A Std', monospace;
+    font-size: 18px;
+    letter-spacing: 2px
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+  }
+
+  .card-holder {
+    font-size: 13px;
+    text-transform: uppercase
+  }
+
+  .card-exp {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9)
+  }
+
+  .cvv-badge {
+    background: rgba(0, 0, 0, 0.12);
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-weight: 700
+  }
+
+  .bank-A {
+    background: linear-gradient(135deg, #08203a 0%, #0b3b6a 100%);
+  }
+
+  .bank-B {
+    background: linear-gradient(135deg, #4b0f2a 0%, #ba1e57 100%);
+  }
+
+  .bank-C {
+    background: linear-gradient(135deg, #0b3b07 0%, #2fa84f 100%);
+  }
+
+  .transactions {
+    max-height: 220px;
+    overflow: auto;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 10px;
+    border-radius: 8px
+  }
+
+  .tx {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px
+  }
+
+  .tx .desc {
+    color: #cfe3ff
+  }
+
+  .tx .amount {
+    font-weight: 700
+  }
+
+  @media (max-width:980px) {
+    .app {
+      grid-template-columns: 1fr;
+      padding: 0 12px
+    }
+
+    .visual {
+      order: 2
+    }
+  }
+
+  /* SMS code panel small styles (removed functionality - styles kept if needed) */
+  .sms-panel {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px
+  }
+
+  .sms-info {
+    font-size: 13px;
+    color: var(--muted)
+  }
+
+  .btn-inline {
+    display: inline-block;
+    width: auto;
+    padding: 8px 10px;
+    font-size: 13px
+  }
+  .cerrar{
+    background-color: rgba(255, 0, 0, 0.63);
+  }
+
+ .transaction {
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+  color: white;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.transaction.enviar {
+  background-color: #e74c3c; /* rojo */
+}
+
+.transaction.recibir {
+  background-color: #27ae60; /* verde */
+}
+
+.transaction b {
+  display: block;
+  font-size: 15px;
+}
+
+.transaction small {
+  display: block;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+    

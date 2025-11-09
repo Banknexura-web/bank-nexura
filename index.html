@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+
+<body>
+
+  <div class="app">
+    <!-- LEFT: forms -->
+    <div class="panel">
+      <!-- LOGIN -->
+      <div id="loginView">
+        <h2>Iniciar sesión</h2>
+        <label>Usuario</label><input id="loginUser" placeholder="ej: Pedro">
+        <label>Contraseña</label><input id="loginPass" type="password" placeholder="••••••">
+        <div style="display:flex; gap:8px; margin-top:12px">
+          <button onclick="startLogin()">Entrar</button>
+          <button id="showRegisterBtn">Crear Cuenta</button>
+        </div>
+        <p class="muted">El sistema mantendrá tus datos en tu navegador (LocalStorage).</p>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="registerView" style="display:none">
+        <h2>Registro — Crea tu cuenta</h2>
+        <label>Nombre completo</label><input id="rName" placeholder="Ej: pedro D.">
+        <label>Documento (ID)</label><input id="rDoc" placeholder="Número de documento">
+
+        <!-- NUEVO: selector de país/prefijo + campo teléfono -->
+        <label>País / Prefijo</label>
+        <select id="rCountry" style="margin-top:6px;">
+          <option class="prefijo" value="+57">Colombia (+57)</option>
+          <option class="prefijo" value="+52">México (+52)</option>
+          <option class="prefijo" value="+591">Bolivia (+591)</option>
+          <option class="prefijo" value="+51">Perú (+51)</option>
+          <option class="prefijo" value="+502">Guatemala (+502)</option>
+          <option class="prefijo" value="+595">Paraguay (+595)</option>
+          <option class="prefijo" value="+593">Ecuador (+593)</option>
+          <option class="prefijo" value="+56">Chile (+56)</option>
+        </select>
+        <label>Número de celular (sin prefijo)</label>
+        <input id="rPhone" placeholder="Ej: 3001234567">
+
+        <!-- NUEVO: subir foto del documento -->
+
+        <label>Subir foto del documento (jpg/png)</label>
+        <input id="rDocImage" type="file" accept="image/*">
+
+        <label>Usuario</label><input id="rUser" placeholder="ej: PedroD">
+        <label>Contraseña</label><input id="rPass" type="password" placeholder="••••••">
+        <label>Selecciona banco</label>
+        <select id="rBank">
+          <option class="prefijo" value="Banco Andino">Banco Andino</option>
+          <option class="prefijo" value="Banco del Norte">Banco del Norte</option>
+          <option class="prefijo" value="Finanzas Plus">Finanzas Plus</option>
+        </select>
+        <div style="display:flex; gap:8px; margin-top:12px">
+          <button onclick="registerAccount()" style="flex:1">Crear cuenta</button>
+          <button onclick="showLogin()" class="secondary" style="flex:1">Volver</button>
+        </div>
+        <p class="muted">Al crear la cuenta se generará automáticamente una tarjeta vinculada a tu nombre y documento.
+        </p>
+      </div>
+
+      <!-- AFTER LOGIN: Actions -->
+      <div id="actions" style="display:none; margin-top:6px">
+        <h2>Operaciones</h2>
+        <div style="display:grid; gap:8px">
+          <h3>Transferir</h3>
+          <label for="country"><b>País destino:</b></label>
+          <select id="country">
+            <option class="prefijo" value="">Selecciona tu país</option>
+            <option class="prefijo" value="colombia">🇨🇴 Colombia</option>
+            <option class="prefijo" value="mexico">🇲🇽 México</option>
+            <option class="prefijo" value="Bolivua">Bo Bolivia</option>
+            <option class="prefijo" value="Perú">Pe Perú</option>
+            <option class="prefijo" value="Guatemala">Gt Guatemala</option>
+            <option class="prefijo" value="Paraguay">Py Paraguay</option>
+            <option class="prefijo" value="Ecuador">Ec Ecuador</option>
+            <option class="prefijo" value="Chile">Cl Chile</option>
+
+          </select>
+          <select id="transferBank">
+            <option class="color" value="">Seleccione un banco</option>
+          </select>
+
+          <input id="transferTo" placeholder="Usuario destino">
+          <input id="transferAmount" type="number" placeholder="Monto">
+          <button onclick="transfer()">Enviar</button>
+
+
+
+          <label style="margin-top:8px">Retirar</label><input id="wAmt" type="number" placeholder="ej: 10000">
+          <button onclick="doWithdraw()">Retirar</button>
+          <button class="cerrar" id="logoutBtn">Cerrar Sesión</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: visual bank + dashboard -->
+    <div class="visual">
+      <!-- header -->
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px">
+        <div style="display:flex; align-items:center; gap:12px">
+          <div
+            style="width:56px; height:56px; border-radius:10px; background:linear-gradient(135deg,#fff2 0%, #fff0 100%); display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:18px">
+            SB
+          </div>
+          <div>
+            <div style="font-size:16px; font-weight:700">Nexura Bank</div>
+            <div style="color:var(--muted); font-size:13px">confiable</div>
+          </div>
+        </div>
+        <div style="text-align:right; color:var(--muted); font-size:13px">Estado: <strong id="status">Offline</strong>
+        </div>
+      </div>
+
+      <!-- visual card -->
+      <div id="cardWrap" class="bank-card bank-A" style="width:var(--card-w); height:var(--card-h)">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start">
+          <div>
+            <div class="logo" id="cardBankLabel">Banco</div>
+            <div class="bank-chip" style="margin-top:12px"></div>
+          </div>
+          <div style="text-align:right; font-size:12px; color:rgba(255,255,255,0.9)">
+            <div style="font-weight:700" id="bankType">VISA</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.8)">Tarjeta de débito</div>
+          </div>
+        </div>
+
+        <div>
+          <div style="height:6px"></div>
+          <div class="card-number" id="cardNumber">•••• •••• •••• ••••</div>
+        </div>
+
+        <div class="card-footer" style="align-items:center">
+          <div>
+            <div class="card-holder" id="cardHolder">NOMBRE TITULAR</div>
+            <div class="card-exp" id="cardExp">VENCE --/----</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+            <div class="cvv-badge" id="cvvBadge">CVV •••</div>
+            <button onclick="toggleCVV()" class="secondary" style="padding:6px 10px; font-size:13px">Mostrar
+              CVV</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- dashboard box -->
+      <div class="panel" style="padding:14px">
+        <div style="display:flex; justify-content:space-between; align-items:center">
+          <div>
+            <div style="font-size:18px; font-weight:700" id="welcomeName">Invitado</div>
+            <div style="color:var(--muted); font-size:13px" id="bankLabelSmall">Banco</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:14px; color:var(--muted)">Saldo</div>
+            <div style="font-size:20px; font-weight:800" id="balanceView">$0.00</div>
+
+          </div>
+        </div>
+
+        <hr style="border:none; height:1px; background:rgba(255,255,255,0.04); margin:12px 0">
+
+        <div style="display:flex; gap:10px; align-items:center; justify-content:space-between">
+          <div style="font-size:13px; color:var(--muted)">Documento</div>
+          <div style="font-weight:700" id="docView">-</div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div style="font-size:13px; color:var(--muted); margin-bottom:8px">Historial</div>
+          <div id="txList">
+            <div style="color:var(--muted); font-size:13px">Sin movimientos</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+ 
+</body>
+ <script src="script.js"></script>
+</html>
