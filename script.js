@@ -531,32 +531,7 @@ function updateDashboard() {
   loadCurrentUserTransactions(); 
 }
 
-// Lista de bancos por país
-const bancosPorPais = {
-  colombia: ["Bancolombia", "Davivienda", "Banco de Bogotá"],
-  mexico: ["BBVA México", "Banorte", "Santander México"],
-  bolivia: ["Banco Nacional de Bolivia", "Banco Mercantil Santa Cruz", "BancoSol"],
-  peru: ["BCP", "Interbank", "Scotiabank Perú"],
-  guatemala: ["Banrural", "BAC Guatemala", "G&T Continental"],
-  paraguay: ["Banco Itaú", "Banco Familiar", "Visión Banco"],
-  ecuador: ["Banco Pichincha", "Produbanco", "Banco Guayaquil"],
-  chile: ["Banco de Chile", "Banco Estado", "BCI"]
-};
 
-document.getElementById("country").addEventListener("change", function () {
-  const pais = this.value;
-  const selectBank = document.getElementById("transferBank");
-  selectBank.innerHTML = '<option value="">Seleccione un banco</option>';
-
-  if (pais && bancosPorPais[pais]) {
-    bancosPorPais[pais].forEach(b => {
-      const opt = document.createElement("option");
-      opt.value = b;
-      opt.textContent = b;
-      selectBank.appendChild(opt);
-    });
-  }
-});
 
 // Actualiza bancos cuando el país cambia
 function updateBanks() {
@@ -700,7 +675,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Ecuador: ["Banco Pichincha ", "Banco del Pacífico", "Banco Guayabil"],
     Chile: ["Banco Santander Chile ", "Banco de Chile", "Banco de Crédito e inversiones"],
     Guatemala: ["Banco Industrial ", "Banrural", "Banco G&T Continental"],
-    bolivia: ["Banco Nacional de Bolivia ", "Banco Mercantil Santa Cruz", "Banco Bisa"],
+    Bolivia: ["Banco Nacional de Bolivia ", "Banco Mercantil Santa Cruz", "Banco Bisa"],
     Paraguay: ["Banco Itaú Paraguay ", "Banco Continetal", "Visión Banco"],
   };
 
@@ -749,6 +724,7 @@ document.getElementById("showRegisterBtn").addEventListener("click", () => {
 document.getElementById("logoutBtn").addEventListener("click", () => {
   logout();
 });
+
 
 
 
