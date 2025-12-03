@@ -677,7 +677,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Guatemala: ["Banco Industrial ", "Banrural", "Banco G&T Continental"],
     Bolivia: ["Banco Nacional de Bolivia ", "Banco Mercantil Santa Cruz", "Banco Bisa"],
     Paraguay: ["Banco Itaú Paraguay ", "Banco Continetal", "Visión Banco"],
-    España: ["Banco Santander S.A ", "CixaBank S.A", "Banco Bilbao Vizcaya Argentina S.A (BBVA)"],
+    España: ["Banco Santander", "CixaBank", "Banco Bilbao Vizcaya Argentina (BBVA)"],
   };
 
   if (countrySelect) {
@@ -725,6 +725,7 @@ document.getElementById("showRegisterBtn").addEventListener("click", () => {
 document.getElementById("logoutBtn").addEventListener("click", () => {
   logout();
 });
+
 
 
 
